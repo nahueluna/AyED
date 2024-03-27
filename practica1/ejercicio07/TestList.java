@@ -127,14 +127,12 @@ public class TestList {
 			}
 		}
 		
-		if(i < lista1.size()) {
-			for(int k = i; k < lista1.size(); k++)
-				lista_resultado.add(lista1.get(k));
-		}
-		else if(j < lista2.size()) {
-			for(int k = j; k < lista2.size(); k++)
-				lista_resultado.add(lista2.get(k));
-		}
+		//Si i or j = listax.size() entonces su respectivo for no ejecuta su cuerpo
+		for(int k = i; k < lista1.size(); k++)
+			lista_resultado.add(lista1.get(k));
+		
+		for(int k = j; k < lista2.size(); k++)
+			lista_resultado.add(lista2.get(k));
 		
 		return lista_resultado;
 	}

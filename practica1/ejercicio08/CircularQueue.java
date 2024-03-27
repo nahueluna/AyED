@@ -23,11 +23,16 @@ public class CircularQueue<T> extends Queue<T>{
 	
 	//Desencola dato del principio, encola al final y lo devuelve
 	public T shift() {
-		T data = dequeue();
+		T data = null;
 		
-		enqueue(data);
+		if(!this.isEmpty()) {
+			data = dequeue();
+			
+			enqueue(data);
+		}
 		
 		return data;
+		
 	}
 	
 }

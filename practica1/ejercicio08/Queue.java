@@ -3,14 +3,10 @@ package practica1.ejercicio08;
 import java.util.*;
 
 public class Queue<T> extends Sequence<T>{
-	private List<T> data;
+	List<T> data;
 	
 	public Queue() {
 		this.data = new LinkedList<T>(); 
-	}
-	
-	public List<T> getData() {
-		return this.data;
 	}
 	
 	//Agrega al final
