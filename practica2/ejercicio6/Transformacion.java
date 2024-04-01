@@ -3,7 +3,7 @@ package practica2.ejercicio6;
 import practica2.ejercicio1y2.BinaryTree;
 
 public class Transformacion {
-	BinaryTree<Integer> binaryTree;
+	private BinaryTree<Integer> binaryTree;
 	
 	public Transformacion(BinaryTree<Integer> binaryTree) {
 		this.binaryTree = binaryTree;
