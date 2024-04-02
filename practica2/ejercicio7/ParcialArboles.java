@@ -64,8 +64,7 @@ public class ParcialArboles {
 		if(subTree != null) {
 			int cantUnico = 0;
 			
-			//^ = xor
-			if(!subTree.isLeaf() && (subTree.hasLeftChild() ^ subTree.hasRightChild())) {
+			if(subTree.hasLeftChild() ^ subTree.hasRightChild()) {
 				cantUnico += 1;
 			}
 			
