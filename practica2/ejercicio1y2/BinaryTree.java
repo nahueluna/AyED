@@ -7,7 +7,7 @@ public class BinaryTree<T> {
 	
 	//Constructor vacio
 	public BinaryTree() {
-		
+		super();
 	}
 	
 	//Construye el árbol con el dato y ambos hijos nulos
@@ -85,80 +85,75 @@ public class BinaryTree<T> {
 	//Retorna cantidad de hojas del árbol
 	public int contarHojas() {
 		int leftLeaf = 0, rightLeaf = 0;
-		
-		if(!this.isEmpty()) {
 			
-			if(this.isLeaf())
-				return 1;
+		if(this.isLeaf())
+			return 1;
 			
-			else {
+		else {
 				
-				if(this.hasLeftChild())
-					leftLeaf = this.getLeftChild().contarHojas();
+			if(this.hasLeftChild())
+				leftLeaf = this.getLeftChild().contarHojas();
 				
-				if(this.hasRightChild())
-					rightLeaf = this.getRightChild().contarHojas();
+			if(this.hasRightChild())
+				rightLeaf = this.getRightChild().contarHojas();
 				
-				return leftLeaf + rightLeaf;
-			}
+			return leftLeaf + rightLeaf;
 		}
 		
-		else
-			return 0;
 	}
 	
 	//Retorna árbol espejo (todos sus nodos cambiados 
 	//de derecha a izquierda y viceversa
 	public BinaryTree<T> espejo() {
-		if(!this.isEmpty()) {
-			BinaryTree<T> reflectedTree = new BinaryTree<T>(this.data);
-			
-			if(this.hasLeftChild())
-				reflectedTree.addRightChild(this.getLeftChild().espejo());
-			
-			if(this.hasRightChild())
-				reflectedTree.addLeftChild(this.getRightChild().espejo());
-			
-			return reflectedTree;
-		}
 		
-		else
-			return null;
+		if(!this.isLeaf()) {
+			BinaryTree<T> aux = new BinaryTree<T>();
+		
+			aux = this.getLeftChild();
+			this.addLeftChild(this.getRightChild());
+			this.addRightChild(aux);
+		}
+			
+		if(this.hasLeftChild())
+				this.getLeftChild().espejo();
+			
+		if(this.hasRightChild())
+				this.getRightChild().espejo();
+			
+		return this;
+		
+		
 	}
 	
 	//Imprime recorrido por niveles entre n y m
 	public void entreNiveles(int n, int m) {
 		if(this.isEmpty() || n < 0 || m < n) return;
 		
-		int nivel = 0, elementosEncolados;
+		int nivel = 0;
 		Queue<BinaryTree<T>> cola = new Queue<BinaryTree<T>>();
 		BinaryTree<T> tree;
 		
 		cola.enqueue(this);
+		cola.enqueue(null);
 		
 		while(!cola.isEmpty() && nivel <= m) {
-			elementosEncolados = cola.size();
+			tree = cola.dequeue();
 			
-			for(int i = 0; i < elementosEncolados; i++) {
-				tree = cola.dequeue();
-				
+			if(tree != null) {
 				if(nivel >= n)
-					System.out.println(tree.toString());
-					
+					System.out.println(tree.getData().toString());
+				
 				if(tree.hasLeftChild())
 					cola.enqueue(tree.getLeftChild());
-					
 				if(tree.hasRightChild())
 					cola.enqueue(tree.getRightChild());
-				
 			}
-						
-			nivel++;
+			else if(!cola.isEmpty()) {
+				cola.enqueue(null);
+				nivel++;
+			}
 		}
 		
-		//Vacía la cola
-		for(int h = 0; h < cola.size(); h++)
-			cola.dequeue();
 	}
 	
 	public void printTree() {

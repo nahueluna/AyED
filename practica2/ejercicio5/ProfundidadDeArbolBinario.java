@@ -22,16 +22,15 @@ public class ProfundidadDeArbolBinario {
 		
 		Queue<BinaryTree<Integer>> cola = new Queue<BinaryTree<Integer>>();
 		BinaryTree<Integer> tree;
-		int nivel = 0, sumaNodos = 0, elementosEncolados;
+		int nivel = 0, sumaNodos = 0;
 		
 		cola.enqueue(getBinaryTree());
+		cola.enqueue(null);
 		
 		while(!cola.isEmpty() && nivel <= p) {
-			elementosEncolados = cola.size();
+			tree = cola.dequeue();
 			
-			for(int i = 0; i < elementosEncolados; i++) {
-				tree = cola.dequeue();
-				
+			if(tree != null) {				
 				if(nivel == p)
 					sumaNodos += tree.getData();
 			
@@ -41,13 +40,12 @@ public class ProfundidadDeArbolBinario {
 				if(tree.hasRightChild())
 					cola.enqueue(tree.getRightChild());
 			}
+			else if(!cola.isEmpty()) {
+				cola.enqueue(null);
+				nivel++;
+			}
 
-			nivel++;
 		}
-		
-		//Vacía la cola
-		for(int h = 0; h < cola.size(); h++)
-			cola.dequeue();
 		
 		return sumaNodos;
 	}

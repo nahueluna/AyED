@@ -25,53 +25,45 @@ public class ContadorArbol {
 	public LinkedList<Integer> numerosParesA() {
 		LinkedList<Integer> listaPares = new LinkedList<Integer>();
 		
-		procesarParesA(getBinaryTree(), listaPares);
+		if(!this.getBinaryTree().isEmpty())
+			procesarParesA(getBinaryTree(), listaPares);
 		
 		return listaPares;
 	}
 	
 	private void procesarParesA(BinaryTree<Integer> tree, LinkedList<Integer> pares) {
-		if(!tree.isEmpty()) {
 			
-			if(tree.hasLeftChild()) {
-				procesarParesA(tree.getLeftChild(), pares);
-			}
+		if(tree.hasLeftChild())
+			procesarParesA(tree.getLeftChild(), pares);
 			
-			if(tree.getData() % 2 == 0) {
+		if(tree.getData() % 2 == 0)
 				pares.add(tree.getData());
-			}
 			
-			if(tree.hasRightChild()) {
+		if(tree.hasRightChild())
 				procesarParesA(tree.getRightChild(), pares);
-			}
 			
-		}
 	}
 	
 	//Postorden
 	public LinkedList<Integer> numerosParesB() {
 		LinkedList<Integer> listaPares = new LinkedList<Integer>();
 		
-		procesarParesB(getBinaryTree(), listaPares);
+		if(!this.getBinaryTree().isEmpty())
+			procesarParesB(getBinaryTree(), listaPares);
 		
 		return listaPares;
 	}
 	
 	private void procesarParesB(BinaryTree<Integer> tree, LinkedList<Integer> pares) {
-		if(!tree.isEmpty()) {
 			
-			if(tree.hasLeftChild()) {
-				procesarParesA(tree.getLeftChild(), pares);
-			}
+		if(tree.hasLeftChild())
+			procesarParesA(tree.getLeftChild(), pares);
 			
-			if(tree.hasRightChild()) {
-				procesarParesA(tree.getRightChild(), pares);
-			}
+		if(tree.hasRightChild())
+			procesarParesA(tree.getRightChild(), pares);
 			
-			if(tree.getData() % 2 == 0) {
-				pares.add(tree.getData());
-			}
+		if(tree.getData() % 2 == 0)
+			pares.add(tree.getData());
 			
-		}
 	}
 }

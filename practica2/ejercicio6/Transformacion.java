@@ -14,30 +14,26 @@ public class Transformacion {
 	}
 	
 	public BinaryTree<Integer> suma() {
-		procesarSumaNodos(getBinaryTree());
+		if(!getBinaryTree().isEmpty())
+			procesarSumaNodos(getBinaryTree());
 		
 		return getBinaryTree();
 	}
 	
 	private int procesarSumaNodos(BinaryTree<Integer> tree) {
 		int sumaIzq = 0, sumaDer = 0, dataActual;
-		
-		if(!tree.isEmpty()) {
 			
-			if(tree.hasLeftChild())
-				sumaIzq = procesarSumaNodos(tree.getLeftChild());
+		if(tree.hasLeftChild())
+			sumaIzq = procesarSumaNodos(tree.getLeftChild());
 			
-			if(tree.hasRightChild())
-				sumaDer = procesarSumaNodos(tree.getRightChild());
+		if(tree.hasRightChild())
+			sumaDer = procesarSumaNodos(tree.getRightChild());
 				
 			
-			dataActual = tree.getData();
-			tree.setData(sumaDer + sumaIzq);
+		dataActual = tree.getData();
+		tree.setData(sumaDer + sumaIzq);
 			
-			return (dataActual + sumaDer + sumaIzq);
+		return (dataActual + sumaDer + sumaIzq);
 			
-		}
-		else
-			return 0;
 	}
 }

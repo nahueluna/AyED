@@ -34,7 +34,7 @@ public class ParcialArboles {
 		BinaryTree<Integer> tempTree = null;
 		boolean found = false;
 		
-		cola.enqueue(pTree);
+		cola.enqueue(this.getBinaryTree());
 		
 		while(!cola.isEmpty() && !found) {
 			tempTree = cola.dequeue();
@@ -50,10 +50,6 @@ public class ParcialArboles {
 					cola.enqueue(tempTree.getRightChild());
 			}
 		}
-		
-		//Vacía cola
-		for(int i = 0; i < cola.size(); i++)
-			cola.dequeue();
 		
 		if(found) return tempTree;
 		else return null;
