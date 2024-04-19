@@ -5,10 +5,10 @@ import practica2.ejercicio1y2.BinaryTree;
 public class ParcialArboles {
 
 	public boolean esPrefijo(BinaryTree<Integer> arbol1, BinaryTree<Integer> arbol2) {
-		boolean isPrefix = true;
+		boolean isPrefix = false;
 		
 		if(!arbol1.isEmpty() && !arbol2.isEmpty())
-			isPrefix = procesarArbolesPrefijo(arbol1, arbol2, isPrefix);
+			isPrefix = procesarArbolesPrefijo(arbol1, arbol2, true);
 		
 		return isPrefix;
 	}

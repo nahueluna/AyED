@@ -17,7 +17,7 @@ public class ParcialArboles {
 	//que el subarbol derecho
 	public boolean isLeftTree(int num) {
 		BinaryTree<Integer> root = buscarNodo(getBinaryTree(), num);;
-		int subArbolIzq = 0, subArbolDer = 0;
+		int subArbolIzq = -1, subArbolDer = -1;
 		
 		if(root != null) {
 			subArbolIzq = procesarSubArbol(root.getLeftChild());
@@ -57,25 +57,18 @@ public class ParcialArboles {
 	
 	//Toma un subarbol y cuenta la cantidad de nodos con hijos únicos (nodos de grado 1)
 	private int procesarSubArbol(BinaryTree<Integer> subTree) {
-		if(subTree != null) {
-			int cantUnico = 0;
+		int cantUnico = 0;
 			
-			if(subTree.hasLeftChild() ^ subTree.hasRightChild()) {
-				cantUnico += 1;
-			}
+		if(subTree.hasLeftChild() ^ subTree.hasRightChild())
+			cantUnico += 1;
 			
-			if(subTree.hasLeftChild())
-				cantUnico += procesarSubArbol(subTree.getLeftChild());
+		if(subTree.hasLeftChild())
+			cantUnico += procesarSubArbol(subTree.getLeftChild());
 			
-			if(subTree.hasRightChild())
-				cantUnico += procesarSubArbol(subTree.getRightChild());
+		if(subTree.hasRightChild())
+			cantUnico += procesarSubArbol(subTree.getRightChild());
 			
-			return cantUnico;
-		}
 		
-		else
-			return -1;
-		
-		
+		return cantUnico;
 	}
 }
