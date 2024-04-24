@@ -148,42 +148,30 @@ public class GeneralTree<T>{
 	
 	//Se presupone que a y b aparecen una sola vez en la estructura
 	public boolean esAncestro(T a, T b) {
-		boolean isAncestor = false;
+		GeneralTree<T> node_b = null;
 		
 		if(!this.isEmpty()) {
-			GeneralTree<T> node_a = buscarNodo(a);
-			isAncestor = buscarAncestro(node_a, b);
+			GeneralTree<T> node_a = buscarNodo(this, a);
+			if(node_a != null)
+				node_b = buscarNodo(node_a, b);
 		}
 		
-		return isAncestor;
+		return node_b != null;
 		
 	}
 	
-	private GeneralTree<T> buscarNodo(T value) {
+	private GeneralTree<T> buscarNodo(GeneralTree<T> t, T value) {
 		
-		if(this.getData().equals(value))
-			return this;
+		if(t.getData().equals(value))
+			return t;
 		
 		GeneralTree<T> aux_tree = null;
 		
-		Iterator<GeneralTree<T>> children = this.getChildren().iterator();	
+		Iterator<GeneralTree<T>> children = t.getChildren().iterator();	
 		while(children.hasNext() && aux_tree == null)
-			aux_tree = children.next().buscarNodo(value);
+			aux_tree = buscarNodo(children.next(), value);
 		
 		return aux_tree;
-	}
-	
-	private boolean buscarAncestro(GeneralTree<T> a, T b) {
-		if(a.getData().equals(b))
-			return true;
-		
-		boolean found = false;
-		
-		Iterator<GeneralTree<T>> children = a.getChildren().iterator();
-		while(children.hasNext() && !found)
-			found = buscarAncestro(children.next(), b);
-		
-		return found;
 	}
 	
 	public void printTree() {
