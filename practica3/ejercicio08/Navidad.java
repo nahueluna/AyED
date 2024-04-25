@@ -1,4 +1,4 @@
-package practica3.ejercicio8;
+package practica3.ejercicio08;
 
 import java.util.List;
 
