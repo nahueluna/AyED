@@ -1,6 +1,6 @@
 package practica3.ejercicio08;
 
-import java.util.List;
+import java.util.Iterator;
 
 import practica3.ejercicio01_03_05.GeneralTree;
 
@@ -22,19 +22,18 @@ public class Navidad<T> {
 	
 	private boolean procesarAbeto(GeneralTree<T> gt) {
 		int cantHojas = 0;
-		boolean esAbeto = true;
-		
-		List<GeneralTree<T>> children = gt.getChildren();
 			
-		if(children.size() >= 3) {
-			for(GeneralTree<T> child: children) {
-				if(child.isLeaf()) cantHojas++;
-				else esAbeto = procesarAbeto(child);
-			}
+		if(gt.getChildren().size() >= 3) {
+			Iterator<GeneralTree<T>> children = gt.getChildren().iterator();
+			
+			while(children.hasNext()) {
+				GeneralTree<T> child = children.next();
 				
-			esAbeto = esAbeto && cantHojas >= 3;
+				if(child.isLeaf()) cantHojas++;
+				else if (!procesarAbeto(child)) return false;
+			}
 		}
 		
-		return esAbeto;
+		return cantHojas >= 3;
 	}
 }

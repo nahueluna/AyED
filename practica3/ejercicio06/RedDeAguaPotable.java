@@ -18,22 +18,22 @@ public class RedDeAguaPotable {
 		double min = -1;
 		
 		if(!red_agua.isEmpty())
-			min = procesarRedMinimoCaudal(red_agua, caudal, Double.MAX_VALUE);
+			min = procesarRedMinimoCaudal(red_agua, caudal);
 		
 		return min;
 	}
 	
-	private double procesarRedMinimoCaudal(GeneralTree<Character> tree, double caudal, double min) {
-		if(tree.isLeaf())
-			min = minimo(min, caudal);
-		
-		else {
+	private double procesarRedMinimoCaudal(GeneralTree<Character> tree, double caudal) {
+		if(!tree.isLeaf()) {
+			double min = Double.MAX_VALUE;
+			
 			List<GeneralTree<Character>> children = tree.getChildren();
 			for(GeneralTree<Character> child: children)
-				min = procesarRedMinimoCaudal(child, (double)caudal/children.size(), min);
+				 min = minimo(min, procesarRedMinimoCaudal(child, (double)caudal/children.size()));
+			
+			return min;
 		}
-		
-		return min;
+		else return caudal;
 	}
 	
 	private double minimo(double x, double y) {
